@@ -3,9 +3,8 @@ applications:
   memory: 512M
   instances: 1
   domain: mybluemix.net
-  name: BeerShop
-  host: BeerShop
+  name: beerApp
+  host: beerApp
   disk_quota: 1024M
   services:
-  - Workload Scheduler-l2
-  - BeerShop-cloudantNoSQLDB
+  - CloudantNoSQLDB-beer
