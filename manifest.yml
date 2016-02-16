@@ -1,0 +1,11 @@
+applications:
+- path: javaCloudantWorkloadSchedulerApp.war
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: BeerShop
+  host: BeerShop
+  disk_quota: 1024M
+  services:
+  - Workload Scheduler-l2
+  - BeerShop-cloudantNoSQLDB
