@@ -7,4 +7,3 @@ applications:
   host: lightApp
   disk_quota: 1024M
   services:
-  - CloudantNoSQLDB
