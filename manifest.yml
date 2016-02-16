@@ -6,4 +6,3 @@ applications:
   name: lightApp
   host: lightApp
   disk_quota: 1024M
-  services:
