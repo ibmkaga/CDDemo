@@ -8,7 +8,7 @@
 	<condition property="ARCHIVE_DIR" value="${env.ARCHIVE_DIR}" else=".">
 	        <isset property="env.ARCHIVE_DIR" />
 	</condition>
-	<property name="warname" value="javaCloudantWorkloadSchedulerApp.war"/>
+	<property name="warname" value="BeerApp.war"/>
     <path id="classpathDir">
         <pathelement location="bin"/>
     	<pathelement location="WebContent/WEB-INF/lib/cloudant-client-1.0.0-beta1.jar"/> 

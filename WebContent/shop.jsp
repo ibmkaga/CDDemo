@@ -1,3 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="org.json.*" %>
+<%@ page import="com.ibm.cloud.utils.*" %>
+
+<%
+    String vcapApp = System.getenv().get("VCAP_APPLICATION");
+    if( vcapApp == null || vcapApp.isEmpty() ) vcapApp = "{}";
+    JSONObject app = new JSONObject(vcapApp);
+    
+    String requestURL = request.getRequestURL().toString();
+    System.out.println("request URL is " + requestURL);
+    
+	String workloadServiceName = "WorkloadScheduler";
+ 	String vcapJSONString = System.getenv("VCAP_SERVICES");
+ 	if (vcapJSONString != null) {
+	    JSONObject json = new JSONObject(vcapJSONString);
+	
+	    String key;
+	    JSONArray twaServiceArray =null;
+	         
+	    System.out.println("Looking for Workload Automation Service..." + json);
+	
+	
+	   for (Object k: json.keySet())
+	   {
+	   System.out.println("Inside the for loop...");
+	       key = (String )k;            
+	       if (key.startsWith(workloadServiceName))
+	       {
+	        	twaServiceArray = (JSONArray)json.get(key);
+	            System.out.println("Workload Automation service found!");
+	            break;
+	       }                       
+	   }
+	   
+	   if (twaServiceArray == null){
+	   	   System.out.println("Could not connect: I was not able to find the Workload Automation service!");
+	   	   System.out.println("This is your VCAP services content");
+	       //System.out.println(vcapJSONString);
+	    }
+	    else{
+	        System.out.println("twa array found");
+		      
+		    JSONObject twsService = (JSONObject)twaServiceArray.get(0); 
+		    JSONObject twsServiceCreds = (JSONObject)twsService.get("credentials");
+		    String twsURL = (String) twsServiceCreds.get("url");
+	    }
+	}
+%>
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -8,7 +61,7 @@
 <meta name="author" content="">
 
 <!-- Le styles -->
-<link href="../assets/css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/bootstrap.css" rel="stylesheet">
 <style type="text/css">
 body {
 	padding-top: 60px;
@@ -27,11 +80,11 @@ body {
 	color: #e0e0e0;
 }
 </style>
-<link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
+      <script src="assets/js/html5shiv.js"></script>
     <![endif]-->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -128,11 +181,11 @@ body {
 </script>
 
 <!-- Fav and touch icons -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon" href="../assets/ico/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="assets/ico/favicon.png">
 </head>
 
 <body>
@@ -143,7 +196,7 @@ body {
                 <!-- button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                     <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
                 </button>
-                <a class="brand" href="#">TWS on Cloud</a>
+                <a class="brand" href="#">IBM on Cloud</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li class="active"><a href="#">Home</a>
@@ -156,6 +209,9 @@ body {
                     <form action="/Orders" id="submitOrderForm" class="navbar-form pull-right">
                         <button type="submit" class="btn">Checkout</button>
                     </form>
+                    <div class="pull-left" style="font-size: 2em; color: white; margin: 8px 1em 0 0;">
+                        Ola Beer Shop
+                    </div>
                     <div class="pull-right" style="font-size: 2em; color: white; margin: 8px 1em 0 0;">
                         Items in cart: <span id="cart_num_items">0</span><span id="cart_amount"></span>
                     </div>
@@ -169,24 +225,25 @@ body {
 
         <!-- Main hero unit for a primary marketing message or call to action -->
         <div class="hero-unit">
-            <h1>Ye olde Beer shop</h1>
-            <p>Showing the finest selection of beers in the world.</p>
+            <!-- <h1>Ola Beer shop</h1>  -->
+            <h5>Showing the finest selection of beers in the world.</h5>
             <p>
                 <a href="#" class="btn btn-primary btn-large">Learn more</a>
             </p>
+            <br>
         </div>
 
         <!-- Example row of columns -->
        <div class="row">
 
             <div class="col-md-4">
-              <h2 style="margin-top:0" class="pull-left">Pauwel Kwak</h2>
+              <h2 style="margin-top:0" class="pull-left">Paua</h2>
               <button onclick="addToShoppingCart(this,'g1')" class="btn btn-primary pull-right"><span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span></button>
                 <div class="row">
                     <div class="col-md-12" style="">
-                        <img class="img-rounded img-responsive" src="kwak.jpg" style="float:left;with=40%">
+                        <img class="img-rounded img-responsive" src="assets/img/kwak.jpg" style="float:left;with=40%">
 
-<p>Pauwel Kwak is an amber ale brewed since the 1980s with 8.4% abv. Supposedly it is named after an 18th-century innkeeper and brewer, Pauwel Kwak. The beer is filtered before packaging in bottles and kegs.</p>
+<p>Paua is an amber ale brewed since the 1980s with 8.4% abv. Supposedly it is named after an 18th-century innkeeper and brewer, Pauwel Kwak. The beer is filtered before packaging in bottles and kegs.</p>
 <p>As with other Belgian beers, Kwak has a branded glass with its own distinctive shape.[3] It is held upright in a wooden stand; the brewery claims the glass was designed by the innkeeper Pauwel Kwak in the early 19th century for coachmen who would stop at his coaching tavern and brewery named "De Hoorn",[4] though the beer and the glass were not launched until the 1980s</p>  
 
                     </div>
@@ -199,19 +256,19 @@ body {
               <button onclick="addToShoppingCart(this,'g2')" class="btn btn-primary pull-right"><span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span></button>                
                 <div class="row">
                     <div class="col-md-12">
-                        <img class="img-rounded img-responsive" src="chimay.jpg" style="float:left;with=40%">
+                        <img class="img-rounded img-responsive" src="assets/img/chimay.jpg" style="float:left;with=40%">
                         <p>Chimay Blue, 9% abv darker ale. </p>
-                        <p>In the 75 cl bottle, it is known as Grande Réserve. This copper-brown beer has a light creamy head and a slightly bitter taste. Considered to be the "classic" Chimay ale, it exhibits a considerable depth of fruity, peppery character.</p>
+                        <p>In the 75 cl bottle, it is known as Grande RÃ©serve. This copper-brown beer has a light creamy head and a slightly bitter taste. Considered to be the "classic" Chimay ale, it exhibits a considerable depth of fruity, peppery character.</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
-                <h2 style="margin-top:0" class="pull-left">Deus Champagne</h2>
+                <h2 style="margin-top:0" class="pull-left">Deus Champ</h2>
               <button onclick="addToShoppingCart(this,'g3')" class="btn btn-primary pull-right"><span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span></button>                
                 <div class="row">
                     <div class="col-md-12">
-                        <img class="img-rounded img-responsive" src="deuschampagne.jpg" style="float:left;with=40%">
+                        <img class="img-rounded img-responsive" src="assets/img/deuschampagne.jpg" style="float:left;with=40%">
                         <p>Belgian ales are often hailed as the union of German beer and French wine technique, but few can claim to be as literally cross-cultural as DeuS. Initially brewed and conditioned in Belgium over a period of months, DeuS is then shipped to France for its final treatment.</p>
                     </div>
                 </div>
@@ -224,7 +281,7 @@ body {
               <button onclick="addToShoppingCart(this,'g4')" class="btn btn-primary pull-right"><span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span></button>                
                 <div class="row">
                     <div class="col-md-12">
-                        <img class="img-rounded img-responsive" src="lefthand.jpg" style="float:left;with=40%">
+                        <img class="img-rounded img-responsive" src="assets/img/lefthand.jpg" style="float:left;with=40%">
                         <p>Dark hazy brown appearance with a rocky cap of foam. Smells distinctively of warm banana bread and light cocoa. Delicate smoked malt notes coalesce with the yeast phenols. The flavors deliver on all the aromas with added levels of baking spices, sweet malt and hoppy notes of mint. Your liquid banana split is served.</p>
                     </div>
                 </div>
@@ -235,19 +292,19 @@ body {
               <button onclick="addToShoppingCart(this,'g5')" class="btn btn-primary pull-right"><span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span></button>                
                 <div class="row">
                     <div class="col-md-12">
-                        <img class="img-rounded img-responsive" src="savour.jpg" style="float:left;with=40%">
-                        <p>This unique beer has exceptional character and flavour that matures with time spent in the bottle; to what extend even we’re not sure yet! Earthy and rustic notes are complimented by a rich highly effervescent beer. A beer for sustenance over refreshment, this is our tribute to the original farmhouse brewers and to this exceptional family of beers.</p>
+                        <img class="img-rounded img-responsive" src="assets/img/savour.jpg" style="float:left;with=40%">
+                        <p>This unique beer has exceptional character and flavour that matures with time spent in the bottle; to what extend even weâre not sure yet! Earthy and rustic notes are complimented by a rich highly effervescent beer. A beer for sustenance over refreshment, this is our tribute to the original farmhouse brewers and to this exceptional family of beers.</p>
                     </div>
                 </div>
             </div>
             
             <div class="col-md-4">
-                <h2 style="margin-top:0" class="pull-left">Thelonious</h2>
+                <h2 style="margin-top:0" class="pull-left">Jhakas</h2>
               <button onclick="addToShoppingCart(this,'g6')" class="btn btn-primary pull-right"><span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span></button>                
                 <div class="row">
                     <div class="col-md-12">
-                        <img class="img-rounded img-responsive" src="thelonious.jpg" style="float:left;with=40%">
-                        <p>Like a Belgian “Dark Strong Ale,” this beer is rich and robust with an ABV of 9.4%. The package features a label picturing the Jazz master himself, and comes in a 750 ml bottle with a traditional cork and wire finish, or 12 oz. 4-packs.</p>
+                        <img class="img-rounded img-responsive" src="assets/img/thelonious.jpg" style="float:left;with=40%">
+                        <p>Like a Belgian âDark Strong Ale,â this beer is rich and robust with an ABV of 9.4%. The package features a label picturing the Jazz master himself, and comes in a 750 ml bottle with a traditional cork and wire finish, or 12 oz. 4-packs.</p>
                     </div>
                 </div>
             </div>
@@ -259,10 +316,11 @@ body {
         <hr>
 
         <footer>
-        <p>&copy; TWS 2013</p>
+        <p>&copy; Cloud 2016</p>
         </footer>
 
     </div>
     <!-- /container -->
+
 </body>
 </html>

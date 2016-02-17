@@ -59,7 +59,7 @@ public class AppListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent arg0) {
         System.out.println("[AppListener] destroy");
         
-        try {
+/*        try {
             TWSService tws = AppWorkflow.getTwsService();
             
             tws.deactivate( wk );
@@ -69,6 +69,6 @@ public class AppListener implements ServletContextListener {
         catch( Throwable t ) {
             System.out.println("[AppListener] got exception: " + t);
             t.printStackTrace(System.out);
-        }
+        }*/
     }
 }

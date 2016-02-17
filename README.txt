@@ -7,7 +7,7 @@ Files
 
 The Java Workload Scheduler Web Starter application contains the following contents:
 
-*   javaCloudantWorkloadSchedulerApp.war
+*   BeerApp.war
 
     This WAR file is actually the application itself. It is the only file that'll be pushed to and run on the Bluemix cloud. Every time your application code is updated, you'll need to regenerate this WAR file and push to Bluemix again. See the next section on detailed steps.
 
