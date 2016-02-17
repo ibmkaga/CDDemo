@@ -1,5 +1,5 @@
 applications:
-- path: javaCloudantWorkloadSchedulerApp.war
+- path: BeerApp.war
   memory: 512M
   instances: 1
   domain: mybluemix.net
