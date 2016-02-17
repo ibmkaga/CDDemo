@@ -80,7 +80,7 @@ body {
 	color: #e0e0e0;
 }
 </style>
-<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+<!--  <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -185,7 +185,6 @@ body {
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon" href="assets/ico/favicon.png">
 </head>
 
 <body>
@@ -297,6 +296,18 @@ body {
                     </div>
                 </div>
             </div>
+                        <div class="col-md-4">
+                <h2 style="margin-top:0" class="pull-left">Jhakas</h2>
+              <button onclick="addToShoppingCart(this,'g6')" class="btn btn-primary pull-right"><span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span></button>                
+                <div class="row">
+                    <div class="col-md-12">
+                        <img class="img-rounded img-responsive" src="assets/img/thelonious.jpg" style="float:left;with=40%">
+                        <p>Like a Belgian âDark Strong Ale,â this beer is rich and robust with an ABV of 9.4%. The package features a label picturing the Jazz master himself, and comes in a 750 ml bottle with a traditional cork and wire finish, or 12 oz. 4-packs.</p>
+                    </div>
+                </div>
+            </div>
+
+			
             
         </div>
 
