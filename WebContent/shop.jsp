@@ -298,20 +298,7 @@ body {
                 </div>
             </div>
             
-            <div class="col-md-4">
-                <h2 style="margin-top:0" class="pull-left">Jhakas</h2>
-              <button onclick="addToShoppingCart(this,'g6')" class="btn btn-primary pull-right"><span aria-hidden="true" class="glyphicon glyphicon-shopping-cart"></span></button>                
-                <div class="row">
-                    <div class="col-md-12">
-                        <img class="img-rounded img-responsive" src="assets/img/thelonious.jpg" style="float:left;with=40%">
-                        <p>Like a Belgian âDark Strong Ale,â this beer is rich and robust with an ABV of 9.4%. The package features a label picturing the Jazz master himself, and comes in a 750 ml bottle with a traditional cork and wire finish, or 12 oz. 4-packs.</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-
 
         <hr>
 
